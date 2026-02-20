@@ -84,3 +84,4 @@ Passionate about building modern web interfaces and intelligent systems.
 
 
 # Student-Registration-Form
+output link https://abiram2008.github.io/Student-Registration-Form/

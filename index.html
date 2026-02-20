@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Student Registration</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    overflow:auto;
+}
+
+/* Animated Background */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background: radial-gradient(circle,#ffffff22 1px, transparent 1px);
+    background-size: 40px 40px;
+    animation: moveBg 20s linear infinite;
+}
+
+@keyframes moveBg{
+    from{ transform: translate(0,0); }
+    to{ transform: translate(-200px,-200px); }
+}
+
+/* Glass Form */
+.container{
+    position:relative;
+    width:420px;
+    padding:35px;
+    background: rgba(255,255,255,0.1);
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+h2{
+    text-align:center;
+    color:white;
+    margin-bottom:25px;
+}
+
+/* Floating Inputs */
+.input-group{
+    position:relative;
+    margin-bottom:25px;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:10px;
+    border:none;
+    outline:none;
+    border-radius:8px;
+    background: rgba(255,255,255,0.2);
+    color:white;
+    font-size:14px;
+}
+
+.input-group select{
+    color:white;
+}
+
+.input-group select option{
+    color:black;
+}
+
+.input-group label{
+    position:absolute;
+    top:10px;
+    left:12px;
+    color:#eee;
+    font-size:14px;
+    pointer-events:none;
+    transition:0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group select:focus + label,
+.input-group select:valid + label{
+    top:-12px;
+    left:10px;
+    font-size:12px;
+    color:#fff;
+}
+
+/* Gender */
+.gender{
+    color:white;
+    margin-bottom:20px;
+    font-size:14px;
+}
+
+.gender input{
+    margin-left:10px;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:#ffffff;
+    color:#764ba2;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* Success Message */
+.success{
+    text-align:center;
+    color:#00ffae;
+    margin-top:15px;
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Registration</h2>
+
+    <form id="regForm">
+
+        <div class="input-group">
+            <input type="text" required>
+            <label>Full Name</label>
+        </div>
+
+        <div class="input-group">
+            <input type="text" required>
+            <label>Roll Number</label>
+        </div>
+
+        <div class="input-group">
+            <select required>
+                <option value="" disabled selected hidden></option>
+
+                <!-- Engineering -->
+                <option>CSE</option>
+                <option>IT</option>
+                <option>ECE</option>
+                <option>EEE</option>
+                <option>MECH</option>
+                <option>Civil Engineering</option>
+                <option>Artificial Intelligence & Machine Learning</option>
+                <option>Artificial Intelligence & Data Science</option>
+                <option>Cyber Security</option>
+                <option>Data Science</option>
+
+                <!-- Science -->
+                <option>B.Sc Computer Science (CS)</option>
+                <option>B.Sc AI & ML</option>
+                <option>B.Sc Information Technology</option>
+                <option>B.Sc Data Science</option>
+                <option>B.Sc Mathematics</option>
+                <option>B.Sc Physics</option>
+                <option>B.Sc Chemistry</option>
+                <option>B.Sc Biotechnology</option>
+
+                <!-- Computer Applications -->
+                <option>BCA</option>
+                <option>MCA</option>
+
+                <!-- Commerce -->
+                <option>B.Com General</option>
+                <option>B.Com Accounting & Finance</option>
+                <option>B.Com Computer Applications</option>
+                <option>M.Com</option>
+
+                <!-- Management -->
+                <option>BBA</option>
+                <option>MBA</option>
+
+                <!-- Arts -->
+                <option>BA English</option>
+                <option>BA Tamil</option>
+                <option>BA Economics</option>
+                <option>BA History</option>
+                <option>BA Psychology</option>
+
+                <!-- Others -->
+                <option>Biotechnology</option>
+                <option>Hotel Management</option>
+                <option>Visual Communication</option>
+                <option>Agriculture</option>
+
+            </select>
+            <label>Department</label>
+        </div>
+
+        <div class="gender">
+            Gender:
+            <input type="radio" name="gender" required> Male
+            <input type="radio" name="gender"> Female
+            <input type="radio" name="gender"> Other
+        </div>
+
+        <div class="input-group">
+            <input type="tel" required>
+            <label>Contact Number</label>
+        </div>
+
+        <div class="input-group">
+            <input type="email" required>
+            <label>Email</label>
+        </div>
+
+        <button type="submit">Register</button>
+        <div class="success" id="successMsg">✔ Registration Successful!</div>
+
+    </form>
+</div>
+
+<script>
+document.getElementById("regForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("successMsg").style.display = "block";
+});
+</script>
+
+</body>
+</html>
